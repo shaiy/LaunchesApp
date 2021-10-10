@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import './App.css';
+import './style.css';
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
         </Link>
         <Switch>
           <Route path="/launch/:id">
-            <div>Single launche page</div>
+            <div>Single launch page</div>
           </Route>
           <Route path="/">
             <div>Multiple launches page</div>

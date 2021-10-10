@@ -1,0 +1,11 @@
+* {
+  box-sizing: border-box;
+  color: #333;
+}
+
+body {
+  background-color: #646668;
+  background-image: url(https://wallpaperaccess.com/full/1544272.jpg);
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
