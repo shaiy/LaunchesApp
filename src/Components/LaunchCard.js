@@ -1,8 +1,9 @@
 import ShareButton from './ShareButton';
 import StatusIndicator from './StatusIndicator';
 import LinesEllipsis from 'react-lines-ellipsis';
+import LaunchTimeDisplay from './LaunchTimeDisplay';
 
-const LaunchCard = ({ id, name, status, missionDescription, imageUrl, slug }) => {
+const LaunchCard = ({ id, name, status, missionDescription, imageUrl, slug, launchTime }) => {
   const buildLink = () => `https://go4liftoff.com/launch/${slug}`;
   return (
     <div className="flex max-w-xl bg-gray-700 rounded-xl text-white">
@@ -18,6 +19,9 @@ const LaunchCard = ({ id, name, status, missionDescription, imageUrl, slug }) =>
         </div>
         <div className="flex space-x-3 mb-4 text-sm font-medium">
           <LinesEllipsis text={missionDescription} maxLine="2" />
+        </div>
+        <div className="w-full flex-none mt-10">
+          <LaunchTimeDisplay time={launchTime} />
         </div>
         <div className="w-full flex-none mt-10">
           <ShareButton link={buildLink()} />

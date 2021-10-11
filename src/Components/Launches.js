@@ -36,6 +36,7 @@ const Launches = () => {
             imageUrl={launch.image}
             status={launch.status.abbrev}
             slug={launch.slug}
+            launchTime={launch.window_end}
           />
         </div>
       ))}
