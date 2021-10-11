@@ -2,10 +2,19 @@ import { useState, useEffect } from 'react';
 import LaunchCard from './LaunchCard';
 import axios from 'axios';
 import Switch from 'react-switch';
+import BeatLoader from 'react-spinners/BeatLoader';
+
+const override = `
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  text-align: center;
+`;
 
 const Launches = () => {
   const [futureLaunches, setFutureLaunches] = useState(false);
   const [launches, setLaunches] = useState([]);
+  let [loading, setLoading] = useState(true);
 
   const handleFutureLaunches = () => {
     setFutureLaunches(!futureLaunches);
@@ -16,11 +25,14 @@ const Launches = () => {
       const launchesType = futureLaunches ? 'upcoming' : 'previous';
       const result = await axios(`https://lldev.thespacedevs.com/2.2.0/launch/${launchesType}/`);
       setLaunches(result.data.results);
+      setLoading(false);
     };
     fetchData();
   }, [futureLaunches]);
 
-  return (
+  return loading ? (
+    <BeatLoader color={'#ff1c1c'} loading={loading} css={override} size={30} />
+  ) : (
     <div className="flex flex-col w-auto">
       <div className="flex mb-3 justify-center">
         <span className="text-white	mr-2">Future Launches</span>
