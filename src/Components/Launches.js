@@ -15,20 +15,18 @@ const Launches = () => {
   }, []);
 
   return (
-    <div class="">
-      <div class="grid-cols-1 w-full mb-10 text-center p-7">
-        <div class="mb-8">
-          {launches.map((launch) => (
-            <LaunchCard
-              id={launch.id}
-              name={launch.name}
-              missionDescription={launch.mission.description}
-              imageUrl={launch.image}
-              status={launch.status.abbrev}
-            />
-          ))}
+    <div className="flex flex-col">
+      {launches.map((launch) => (
+        <div className="flex mb-3 justify-center" key={launch.id}>
+          <LaunchCard
+            id={launch.id}
+            name={launch.name}
+            missionDescription={launch.mission.description}
+            imageUrl={launch.image}
+            status={launch.status.abbrev}
+          />
         </div>
-      </div>
+      ))}
     </div>
   );
 };

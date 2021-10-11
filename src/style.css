@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
 body {
-  background-color: #646668;
-  background-image: url(https://wallpaperaccess.com/full/1544272.jpg);
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
 }

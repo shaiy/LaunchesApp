@@ -8,11 +8,11 @@ const ShareButton = ({ link }) => {
 
   return (
     <button
-      class="flex items-center bg-gray-200 hover:opacity-50 text-black p-2 rounded-full text-sm w-auto h-8 text-gray-600"
-      onClick={copyToClipboard()}
+      className="flex items-center bg-gray-200 hover:opacity-50 text-black p-2 rounded-full text-sm w-auto h-8 text-gray-600"
+      onClick={copyToClipboard}
     >
       <BsFillShareFill />
-      <span class="ml-2 mr-7 text-sm">Share</span>
+      <span className="ml-2 mr-7 text-sm">Share</span>
     </button>
   );
 };

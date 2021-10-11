@@ -6,7 +6,7 @@ import Launches from './Components/Launches';
 
 const App = () => {
   return (
-    <div>
+    <div className="">
       <Router>
         <header className="w-full mb-10 text-center p-7">
           <Link to="/" className="text-6xl text-white hover:text-gray-200">
