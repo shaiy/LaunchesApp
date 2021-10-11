@@ -5,9 +5,9 @@ import StatusIndicator from './StatusIndicator';
 const LaunchCard = ({ id, name, status, missionDescription, imageUrl, slug }) => {
   return (
     <Link to={`/launch/${id}`}>
-      <div className="flex max-w-xl bg-white rounded">
+      <div className="flex max-w-xl bg-gray-700 rounded-xl text-white">
         <div className="flex-none w-48 relative">
-          <img src={imageUrl} alt={name} className="absolute inset-0 w-full h-full object-cover" />
+          <img src={imageUrl} alt={name} className="absolute inset-0 w-full h-full object-cover rounded-l-xl" />
         </div>
         <div className="flex-auto p-6">
           <div className="flex flex-wrap">
