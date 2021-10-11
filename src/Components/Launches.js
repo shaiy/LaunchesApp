@@ -24,6 +24,7 @@ const Launches = () => {
             missionDescription={launch.mission.description}
             imageUrl={launch.image}
             status={launch.status.abbrev}
+            slug={launch.slug}
           />
         </div>
       ))}
