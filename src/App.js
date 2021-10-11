@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './style.css';
 
 import LaunchCard from './Components/LaunchCard';
+import Launches from './Components/Launches';
 
 const App = () => {
   return (
@@ -26,7 +27,7 @@ const App = () => {
             />
           </Route>
           <Route path="/">
-            <div>Multiple launches page</div>
+            <Launches />
           </Route>
         </Switch>
       </Router>
