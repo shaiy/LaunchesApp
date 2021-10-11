@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import './style.css';
 
-import Launch from './Components/Launch';
+import LaunchCard from './Components/LaunchCard';
 
 const App = () => {
   return (
@@ -14,7 +14,7 @@ const App = () => {
         </header>
         <Switch>
           <Route path="/launch/:id">
-            <Launch
+            <LaunchCard
               id={1234}
               name={"Shai's launch"}
               status={'success'}
