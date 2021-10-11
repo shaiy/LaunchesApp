@@ -7,7 +7,7 @@ const LaunchTimeDisplay = ({ time }) => {
     ) : (
       <>
         <div className="grid grid-rows-2 grid-cols-5  gap-3 items-center">
-          <div className="row-span-2 text-2xl font-bold">T-</div>
+          <div className="row-span-2 text-2xl font-bold">T -</div>
           <div>{days}</div>
           <div>{hours}</div>
           <div>{minutes}</div>
