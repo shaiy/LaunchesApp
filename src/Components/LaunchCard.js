@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import ShareButton from './ShareButton';
 import StatusIndicator from './StatusIndicator';
 import LinesEllipsis from 'react-lines-ellipsis';
@@ -18,7 +17,6 @@ const LaunchCard = ({ id, name, status, missionDescription, imageUrl, slug }) =>
           </div>
         </div>
         <div className="flex space-x-3 mb-4 text-sm font-medium">
-          {/* <p className="flex-auto flex space-x-3">{missionDescription}</p> */}
           <LinesEllipsis text={missionDescription} maxLine="2" />
         </div>
         <div className="w-full flex-none mt-10">
