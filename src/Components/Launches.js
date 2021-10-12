@@ -14,7 +14,7 @@ const override = `
 const Launches = () => {
   const [futureLaunches, setFutureLaunches] = useState(false);
   const [launches, setLaunches] = useState([]);
-  let [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const handleFutureLaunches = () => {
     setFutureLaunches(!futureLaunches);
