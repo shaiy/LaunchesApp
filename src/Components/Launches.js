@@ -38,7 +38,7 @@ const Launches = () => {
   }, [futureLaunches]);
 
   return isError ? (
-    <div>Something went wrong ...</div>
+    <div className="text-white text-center">Something went wrong...</div>
   ) : loading ? (
     <BeatLoader color={'#BFDBFE'} loading={loading} css={override} size={30} />
   ) : (
