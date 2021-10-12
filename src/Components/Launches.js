@@ -15,6 +15,7 @@ const Launches = () => {
   const [futureLaunches, setFutureLaunches] = useState(false);
   const [launches, setLaunches] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   const handleFutureLaunches = () => {
     setFutureLaunches(!futureLaunches);
@@ -24,14 +25,21 @@ const Launches = () => {
     const fetchData = async () => {
       setLoading(true);
       const launchesType = futureLaunches ? 'upcoming' : 'previous';
-      const result = await axios(`https://lldev.thespacedevs.com/2.2.0/launch/${launchesType}/`);
-      setLaunches(result.data.results);
-      setLoading(false);
+      try {
+        const result = await axios(`https://lldev.thespacedevs.com/2.2.0/launch/${launchesType}/`);
+        setLaunches(result.data.results);
+      } catch (error) {
+        setIsError(true);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchData();
   }, [futureLaunches]);
 
-  return loading ? (
+  return isError ? (
+    <div>Something went wrong ...</div>
+  ) : loading ? (
     <BeatLoader color={'#BFDBFE'} loading={loading} css={override} size={30} />
   ) : (
     <div className="flex flex-col w-auto">
