@@ -14,7 +14,8 @@ const App = () => {
           </Link>
         </header>
         <Switch>
-          <Route path="/launch/:id">
+          {/* todo: single launch page */}
+          {/* <Route path="/launch/:id">
             <LaunchCard
               id={1234}
               name={"Shai's launch"}
@@ -25,7 +26,7 @@ const App = () => {
               imageUrl="https://spacelaunchnow-prod-east.nyc3.digitaloceanspaces.com/media/launcher_images/new2520shepard_image_20190207032624.jpeg"
               slug="slug"
             />
-          </Route>
+          </Route> */}
           <Route path="/">
             <Launches />
           </Route>

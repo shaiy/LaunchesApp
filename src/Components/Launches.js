@@ -7,8 +7,8 @@ import BeatLoader from 'react-spinners/BeatLoader';
 const override = `
   display: block;
   margin: 0 auto;
-  border-color: red;
   text-align: center;
+  opacity: 50%;
 `;
 
 const Launches = () => {
@@ -22,6 +22,7 @@ const Launches = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const launchesType = futureLaunches ? 'upcoming' : 'previous';
       const result = await axios(`https://lldev.thespacedevs.com/2.2.0/launch/${launchesType}/`);
       setLaunches(result.data.results);
@@ -31,7 +32,7 @@ const Launches = () => {
   }, [futureLaunches]);
 
   return loading ? (
-    <BeatLoader color={'#ff1c1c'} loading={loading} css={override} size={30} />
+    <BeatLoader color={'#BFDBFE'} loading={loading} css={override} size={30} />
   ) : (
     <div className="flex flex-col w-auto">
       <div className="flex mb-3 justify-center">
