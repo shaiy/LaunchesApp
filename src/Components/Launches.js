@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import LaunchCard from './LaunchCard';
 import axios from 'axios';
 import Switch from 'react-switch';
 import BeatLoader from 'react-spinners/BeatLoader';
+
+import LaunchCard from './LaunchCard';
+import Pagination from './Pagination';
 
 const override = `
   display: block;
@@ -16,18 +18,27 @@ const Launches = () => {
   const [launches, setLaunches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalCount, setTotalCount] = useState(0);
 
   const handleFutureLaunches = () => {
     setFutureLaunches(!futureLaunches);
+    setCurrentPage(1);
   };
+
+  const offset = () => currentPage * pageSize;
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const launchesType = futureLaunches ? 'upcoming' : 'previous';
       try {
-        const result = await axios(`https://lldev.thespacedevs.com/2.2.0/launch/${launchesType}/`);
+        const result = await axios(
+          `https://lldev.thespacedevs.com/2.2.0/launch/${launchesType}/?limit=${pageSize}&offset=${offset()}`
+        );
         setLaunches(result.data.results);
+        setTotalCount(result.data.count);
       } catch (error) {
         setIsError(true);
       } finally {
@@ -35,7 +46,7 @@ const Launches = () => {
       }
     };
     fetchData();
-  }, [futureLaunches]);
+  }, [futureLaunches, currentPage]);
 
   return isError ? (
     <div className="text-white text-center">Something went wrong...</div>
@@ -47,13 +58,12 @@ const Launches = () => {
         <span className="text-white	mr-2">Future Launches</span>
         <Switch checked={futureLaunches} onChange={handleFutureLaunches} />
       </div>
-
       {launches.map((launch) => (
         <div className="flex mb-3 justify-center" key={launch.id}>
           <LaunchCard
             id={launch.id}
             name={launch.name}
-            missionDescription={launch.mission.description}
+            missionDescription={launch.mission?.description}
             imageUrl={launch.image}
             status={launch.status.abbrev}
             slug={launch.slug}
@@ -61,6 +71,15 @@ const Launches = () => {
           />
         </div>
       ))}
+      <div className="flex mb-3 justify-center">
+        <Pagination
+          className="text-center text-white"
+          currentPage={currentPage}
+          totalCount={totalCount}
+          pageSize={pageSize}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
+      </div>
     </div>
   );
 };
