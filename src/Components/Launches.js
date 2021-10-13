@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Switch from 'react-switch';
 import BeatLoader from 'react-spinners/BeatLoader';
+import Select from 'react-select';
 
 import LaunchCard from './LaunchCard';
 import Pagination from './Pagination';
@@ -22,8 +23,20 @@ const Launches = () => {
   const [pageSize, setPageSize] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
 
+  const pageSizeOptions = [
+    { value: 5, label: '5' },
+    { value: 10, label: '10' },
+    { value: 15, label: '15' },
+    { value: 20, label: '20' },
+  ];
+
   const handleFutureLaunches = () => {
     setFutureLaunches(!futureLaunches);
+    setCurrentPage(1);
+  };
+
+  const handlePageSizeChange = (pageSize) => {
+    setPageSize(pageSize.value);
     setCurrentPage(1);
   };
 
@@ -46,7 +59,8 @@ const Launches = () => {
       }
     };
     fetchData();
-  }, [futureLaunches, currentPage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [futureLaunches, currentPage, pageSize]);
 
   return isError ? (
     <div className="text-white text-center">Something went wrong...</div>
@@ -57,6 +71,10 @@ const Launches = () => {
       <div className="flex mb-3 justify-center">
         <span className="text-white	mr-2">Future Launches</span>
         <Switch checked={futureLaunches} onChange={handleFutureLaunches} />
+      </div>
+      <div className="flex mb-3 justify-center">
+        <span className="text-white	mr-2 mt-2">pageSize</span>
+        <Select value={pageSize} options={pageSizeOptions} onChange={handlePageSizeChange} placeholder={pageSize} />
       </div>
       {launches.map((launch) => (
         <div className="flex mb-3 justify-center" key={launch.id}>

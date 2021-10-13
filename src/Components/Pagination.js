@@ -4,7 +4,6 @@ import { usePagination, DOTS } from '../Hooks/usePagination';
 import './pagination.scss';
 const Pagination = (props) => {
   const { onPageChange, totalCount, siblingCount = 1, currentPage, pageSize, className } = props;
-
   const paginationRange = usePagination({
     currentPage,
     totalCount,
