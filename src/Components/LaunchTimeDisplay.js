@@ -1,13 +1,16 @@
 import Countdown from 'react-countdown';
+import { Text } from '@chakra-ui/react';
 
 const LaunchTimeDisplay = ({ time }) => {
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
     return completed ? (
-      <span>Launched at {time}</span>
+      <Text fontSize="lg" fontWeight="medium">
+        Launched at {time}
+      </Text>
     ) : (
       <>
-        <div className="grid grid-rows-2 grid-cols-5  gap-3 items-center">
-          <div className="row-span-2 text-2xl font-bold">T -</div>
+        <div>
+          <div>T -</div>
           <div>{days}</div>
           <div>{hours}</div>
           <div>{minutes}</div>

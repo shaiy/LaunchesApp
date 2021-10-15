@@ -20,7 +20,6 @@ const Launches = () => {
   const handleFutureLaunches = () => {
     setFutureLaunches(!futureLaunches);
   };
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -42,14 +41,14 @@ const Launches = () => {
   ) : loading ? (
     <BeatLoader color={'#BFDBFE'} loading={loading} css={override} size={30} />
   ) : (
-    <div className="flex flex-col w-auto">
-      <div className="flex mb-3 justify-center">
-        <span className="text-white	mr-2">Future Launches</span>
+    <div>
+      <div>
+        <span>Future Launches</span>
         <Switch checked={futureLaunches} onChange={handleFutureLaunches} />
       </div>
 
       {launches.map((launch) => (
-        <div className="flex mb-3 justify-center" key={launch.id}>
+        <div key={launch.id}>
           <LaunchCard
             id={launch.id}
             name={launch.name}
