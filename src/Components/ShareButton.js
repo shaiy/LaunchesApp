@@ -1,4 +1,5 @@
 import { BsFillShareFill } from 'react-icons/bs';
+import { Button } from '@chakra-ui/react';
 
 const ShareButton = ({ link }) => {
   const copyToClipboard = () => {
@@ -7,10 +8,18 @@ const ShareButton = ({ link }) => {
   };
 
   return (
-    <button onClick={copyToClipboard}>
-      <BsFillShareFill />
-      <span>Share</span>
-    </button>
+    <Button
+      leftIcon={<BsFillShareFill />}
+      onClick={copyToClipboard}
+      width="6rem"
+      borderRadius="xl"
+      colorScheme="linkedin"
+      variant="solid"
+      marginTop="2rem"
+      marginBottom="2rem"
+    >
+      Share
+    </Button>
   );
 };
 

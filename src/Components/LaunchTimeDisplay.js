@@ -4,12 +4,18 @@ import { Text, GridItem, Grid, Center } from '@chakra-ui/react';
 const LaunchTimeDisplay = ({ time }) => {
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
     return completed ? (
-      <Text fontSize="lg" fontWeight="medium">
+      <Text fontSize="lg" fontWeight="medium" marginTop="1rem">
         Launched at {time}
       </Text>
     ) : (
       <>
-        <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" height="4rem" fontWeight="bold">
+        <Grid
+          templateRows="repeat(2, 1fr)"
+          templateColumns="repeat(5, 1fr)"
+          height="4rem"
+          fontWeight="bold"
+          marginTop="1rem"
+        >
           <GridItem rowSpan={2} colSpan={1}>
             <Center height="full">T -</Center>
           </GridItem>
