@@ -1,5 +1,5 @@
 import Countdown from 'react-countdown';
-import { Text } from '@chakra-ui/react';
+import { Text, GridItem, Grid, Center } from '@chakra-ui/react';
 
 const LaunchTimeDisplay = ({ time }) => {
   const renderer = ({ days, hours, minutes, seconds, completed }) => {
@@ -9,17 +9,19 @@ const LaunchTimeDisplay = ({ time }) => {
       </Text>
     ) : (
       <>
-        <div>
-          <div>T -</div>
-          <div>{days}</div>
-          <div>{hours}</div>
-          <div>{minutes}</div>
-          <div>{seconds}</div>
-          <div>Days</div>
-          <div>Hours</div>
-          <div>Minutes</div>
-          <div>seconds</div>
-        </div>
+        <Grid templateRows="repeat(2, 1fr)" templateColumns="repeat(5, 1fr)" height="4rem" fontWeight="bold">
+          <GridItem rowSpan={2} colSpan={1}>
+            <Center height="full">T -</Center>
+          </GridItem>
+          <GridItem>{days}</GridItem>
+          <GridItem>{hours}</GridItem>
+          <GridItem>{minutes}</GridItem>
+          <GridItem>{seconds}</GridItem>
+          <GridItem fontWeight="light">Days</GridItem>
+          <GridItem fontWeight="light">Hours</GridItem>
+          <GridItem fontWeight="light">Minutes</GridItem>
+          <GridItem fontWeight="light">Seconds</GridItem>
+        </Grid>
       </>
     );
   };
