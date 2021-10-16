@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, Heading } from '@chakra-ui/react';
 import './style.css';
 
 import Launches from './Components/Launches';
@@ -11,7 +11,9 @@ const App = () => {
         <Router>
           <header>
             <Link to="/">
-              <h1>Launches App</h1>
+              <Heading textAlign="center" margin="2rem" size="4xl">
+                Launches App
+              </Heading>
             </Link>
           </header>
           <Switch>
