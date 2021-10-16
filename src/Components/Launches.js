@@ -1,20 +1,15 @@
 import { useState, useEffect } from 'react';
 import LaunchCard from './LaunchCard';
 import axios from 'axios';
-import { Flex, Spacer, Switch, Text, Spinner } from '@chakra-ui/react';
-
-const override = `
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-  opacity: 50%;
-`;
+import { Flex, Switch, Text, Spinner, useColorMode, Button, Icon } from '@chakra-ui/react';
+import { MdDarkMode, MdOutlineLightMode } from 'react-icons/md';
 
 const Launches = () => {
   const [futureLaunches, setFutureLaunches] = useState(false);
   const [launches, setLaunches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const handleFutureLaunches = () => {
     setFutureLaunches(!futureLaunches);
@@ -43,9 +38,11 @@ const Launches = () => {
         <Text fontSize="xl" fontWeight="bold" mr="1rem">
           Future Launches{' '}
         </Text>
-        <Spacer />
         <Switch isChecked={futureLaunches} colorScheme="whatsapp" size="lg" onChange={handleFutureLaunches} />
       </Flex>
+      <Button onClick={toggleColorMode} maxW="10rem" alignSelf="center" margin="1rem">
+        <Icon as={colorMode === 'light' ? MdDarkMode : MdOutlineLightMode} />
+      </Button>
       {loading ? (
         <Spinner
           thickness="4px"
