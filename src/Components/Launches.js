@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import LaunchCard from './LaunchCard';
 import axios from 'axios';
-import Switch from 'react-switch';
 import BeatLoader from 'react-spinners/BeatLoader';
-import { Flex, Box } from '@chakra-ui/react';
+import { Flex, Spacer, Switch, Text } from '@chakra-ui/react';
 
 const override = `
   display: block;
@@ -43,10 +42,13 @@ const Launches = () => {
     <BeatLoader color={'#BFDBFE'} loading={loading} css={override} size={30} />
   ) : (
     <Flex flexFlow="column wrap">
-      <Box alignSelf="center">
-        <span>Future Launches</span>
-        <Switch checked={futureLaunches} onChange={handleFutureLaunches} />
-      </Box>
+      <Flex alignSelf="center" flexFlow="row">
+        <Text fontSize="xl" fontWeight="bold" mr="1rem">
+          Future Launches{' '}
+        </Text>
+        <Spacer />
+        <Switch isChecked={futureLaunches} colorScheme="whatsapp" size="lg" onChange={handleFutureLaunches} />
+      </Flex>
       <Flex flexFlow="row wrap" justifyContent="center">
         {launches.map((launch) => (
           <div key={launch.id}>
