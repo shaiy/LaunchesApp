@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import { ChakraProvider, Heading, useColorMode, Button, ThemeProvider } from '@chakra-ui/react';
+import { ChakraProvider, Heading } from '@chakra-ui/react';
 import theme from './theme';
 import './style.css';
 
