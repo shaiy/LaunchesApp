@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import LaunchCard from './LaunchCard';
 import axios from 'axios';
-import BeatLoader from 'react-spinners/BeatLoader';
-import { Flex, Spacer, Switch, Text } from '@chakra-ui/react';
+import { Flex, Spacer, Switch, Text, Spinner } from '@chakra-ui/react';
 
 const override = `
   display: block;
@@ -38,8 +37,6 @@ const Launches = () => {
 
   return isError ? (
     <div className="text-white text-center">Something went wrong...</div>
-  ) : loading ? (
-    <BeatLoader color={'#BFDBFE'} loading={loading} css={override} size={30} />
   ) : (
     <Flex flexFlow="column wrap">
       <Flex alignSelf="center" flexFlow="row">
@@ -49,21 +46,33 @@ const Launches = () => {
         <Spacer />
         <Switch isChecked={futureLaunches} colorScheme="whatsapp" size="lg" onChange={handleFutureLaunches} />
       </Flex>
-      <Flex flexFlow="row wrap" justifyContent="center">
-        {launches.map((launch) => (
-          <div key={launch.id}>
-            <LaunchCard
-              id={launch.id}
-              name={launch.name}
-              missionDescription={launch.mission.description}
-              imageUrl={launch.image}
-              status={launch.status.abbrev}
-              slug={launch.slug}
-              launchTime={launch.window_end}
-            />
-          </div>
-        ))}
-      </Flex>
+      {loading ? (
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="red.500"
+          size="xl"
+          alignSelf="center"
+          mt="10rem"
+        />
+      ) : (
+        <Flex flexFlow="row wrap" justifyContent="center">
+          {launches.map((launch) => (
+            <div key={launch.id}>
+              <LaunchCard
+                id={launch.id}
+                name={launch.name}
+                missionDescription={launch.mission.description}
+                imageUrl={launch.image}
+                status={launch.status.abbrev}
+                slug={launch.slug}
+                launchTime={launch.window_end}
+              />
+            </div>
+          ))}
+        </Flex>
+      )}
     </Flex>
   );
 };
