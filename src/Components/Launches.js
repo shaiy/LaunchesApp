@@ -3,6 +3,7 @@ import LaunchCard from './LaunchCard';
 import axios from 'axios';
 import Switch from 'react-switch';
 import BeatLoader from 'react-spinners/BeatLoader';
+import { Flex, Box } from '@chakra-ui/react';
 
 const override = `
   display: block;
@@ -41,26 +42,27 @@ const Launches = () => {
   ) : loading ? (
     <BeatLoader color={'#BFDBFE'} loading={loading} css={override} size={30} />
   ) : (
-    <div>
-      <div>
+    <Flex flexFlow="column wrap">
+      <Box alignSelf="center">
         <span>Future Launches</span>
         <Switch checked={futureLaunches} onChange={handleFutureLaunches} />
-      </div>
-
-      {launches.map((launch) => (
-        <div key={launch.id}>
-          <LaunchCard
-            id={launch.id}
-            name={launch.name}
-            missionDescription={launch.mission.description}
-            imageUrl={launch.image}
-            status={launch.status.abbrev}
-            slug={launch.slug}
-            launchTime={launch.window_end}
-          />
-        </div>
-      ))}
-    </div>
+      </Box>
+      <Flex flexFlow="row wrap" justifyContent="center">
+        {launches.map((launch) => (
+          <div key={launch.id}>
+            <LaunchCard
+              id={launch.id}
+              name={launch.name}
+              missionDescription={launch.mission.description}
+              imageUrl={launch.image}
+              status={launch.status.abbrev}
+              slug={launch.slug}
+              launchTime={launch.window_end}
+            />
+          </div>
+        ))}
+      </Flex>
+    </Flex>
   );
 };
 
