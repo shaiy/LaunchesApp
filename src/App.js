@@ -8,22 +8,20 @@ import Launches from './Components/Launches';
 const App = () => {
   return (
     <ChakraProvider theme={theme}>
-      <div className="">
-        <Router>
-          <header>
-            <Link to="/">
-              <Heading textAlign="center" margin="2rem" size="4xl">
-                Launches App
-              </Heading>
-            </Link>
-          </header>
-          <Switch>
-            <Route path="/">
-              <Launches />
-            </Route>
-          </Switch>
-        </Router>
-      </div>
+      <Router>
+        <header>
+          <Link to="/">
+            <Heading textAlign="center" margin="2rem" size="4xl">
+              Launches App
+            </Heading>
+          </Link>
+        </header>
+        <Switch>
+          <Route path="/">
+            <Launches />
+          </Route>
+        </Switch>
+      </Router>
     </ChakraProvider>
   );
 };
