@@ -34,19 +34,19 @@ export const toggleFutureLaunchesSelector = (futureLaunchesIndicator) => ({
 });
 
 export function fetchLaunches(isFutureLaunches) {
-  return function setLaunchesThunk(dispatch) {
+  return async function setLaunchesThunk(dispatch) {
     dispatch(changeLoadingState(true));
-    return getLaunchesData(isFutureLaunches)
-      .then(({ data }) => {
-        dispatch({
-          type: SET_LAUNCHES,
-          payload: data.results,
-        });
-      })
-      .then(dispatch(changeLoadingState(false)))
-      .catch((e) => {
-        console.log(e);
-        dispatch(changeErrorState(true));
+    try {
+      const data = await getLaunchesData(isFutureLaunches);
+      console.log(data);
+      dispatch({
+        type: SET_LAUNCHES,
+        payload: data.data.results,
       });
+    } catch (err) {
+      dispatch(changeErrorState(true));
+    } finally {
+      dispatch(changeLoadingState(false));
+    }
   };
 }
