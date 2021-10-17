@@ -1,3 +1,6 @@
+import { getLaunchesData } from '../api';
+import { changeLoadingState, changeErrorState } from '../store/statusIndication';
+
 const initialState = {
   showFutureLaunches: false,
   launches: [],
@@ -30,7 +33,20 @@ export const toggleFutureLaunchesSelector = (futureLaunchesIndicator) => ({
   payload: futureLaunchesIndicator,
 });
 
-export const setLaunches = (launchesData) => ({
-  type: SET_LAUNCHES,
-  payload: launchesData,
-});
+export function fetchLaunches(isFutureLaunches) {
+  return function setLaunchesThunk(dispatch) {
+    dispatch(changeLoadingState(true));
+    return getLaunchesData(isFutureLaunches)
+      .then(({ data }) => {
+        dispatch({
+          type: SET_LAUNCHES,
+          payload: data.results,
+        });
+      })
+      .then(dispatch(changeLoadingState(false)))
+      .catch((e) => {
+        console.log(e);
+        dispatch(changeErrorState(true));
+      });
+  };
+}
