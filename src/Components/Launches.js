@@ -5,8 +5,8 @@ import { Flex, Switch, Text, Spinner, useColorMode, Button, Icon } from '@chakra
 import { MdDarkMode, MdOutlineLightMode } from 'react-icons/md';
 
 import LaunchCard from './LaunchCard';
-import { getIsLoading, getIsError } from '../store/statusIndication';
-import { getLaunches, getShowFutureLaunches } from '../store/launches';
+import { getIsLoading, getIsError, changeLoadingState, changeErrorState } from '../store/statusIndication';
+import { getLaunches, getShowFutureLaunches, toggleFutureLaunchesSelector, setLaunches } from '../store/launches';
 
 const Launches = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -19,21 +19,21 @@ const Launches = () => {
   const isError = useSelector(getIsError);
 
   const handleFutureLaunches = () => {
-    dispatch({ type: 'toggleFutureLaunches', payload: !futureLaunches });
+    dispatch(toggleFutureLaunchesSelector(!futureLaunches));
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: 'status/setLoading', payload: true });
+      dispatch(changeLoadingState(true));
       const launchesType = futureLaunches ? 'upcoming' : 'previous';
       try {
         const result = await axios(`https://lldev.thespacedevs.com/2.2.0/launch/${launchesType}/`);
-        dispatch({ type: 'launches/setLaunches', payload: result.data.results });
+        dispatch(setLaunches(result.data.results));
       } catch (error) {
         console.log(error);
-        dispatch({ type: 'status/setError', payload: true });
+        dispatch(changeErrorState(true));
       } finally {
-        dispatch({ type: 'status/setLoading', payload: false });
+        dispatch(changeLoadingState(false));
       }
     };
     fetchData();
@@ -69,7 +69,7 @@ const Launches = () => {
               <LaunchCard
                 id={launch.id}
                 name={launch.name}
-                missionDescription={launch.mission.description}
+                missionDescription={launch.mission ? launch.mission.description : 'No description'}
                 imageUrl={launch.image}
                 status={launch.status.abbrev}
                 slug={launch.slug}
