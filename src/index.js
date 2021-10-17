@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ColorModeScript } from '@chakra-ui/react';
+import { Provider } from 'react-redux';
+
+import { store } from './store/store';
 import App from './App';
 import theme from './theme';
+
 import './style.css';
-import { ColorModeScript } from '@chakra-ui/react';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-    <App />
+    <Provider store={store}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

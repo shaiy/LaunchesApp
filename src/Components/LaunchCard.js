@@ -3,7 +3,7 @@ import StatusIndicator from './StatusIndicator';
 import LaunchTimeDisplay from './LaunchTimeDisplay';
 import { Flex, Image, Heading, Text } from '@chakra-ui/react';
 
-const LaunchCard = ({ id, name, status, missionDescription, imageUrl, slug, launchTime }) => {
+const LaunchCard = ({ name, status, missionDescription, imageUrl, slug, launchTime }) => {
   const buildLink = () => `https://go4liftoff.com/launch/${slug}`;
   return (
     <Flex width="40rem" height="20rem" bgColor="gray.700" margin="1rem" borderRadius="lg" opacity="90%">

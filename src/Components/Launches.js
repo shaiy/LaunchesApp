@@ -1,34 +1,40 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import LaunchCard from './LaunchCard';
 import axios from 'axios';
 import { Flex, Switch, Text, Spinner, useColorMode, Button, Icon } from '@chakra-ui/react';
 import { MdDarkMode, MdOutlineLightMode } from 'react-icons/md';
 
 const Launches = () => {
-  const [futureLaunches, setFutureLaunches] = useState(false);
-  const [launches, setLaunches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
 
+  const dispatch = useDispatch();
+
+  const futureLaunches = useSelector((state) => state.showFutureLaunches);
+  const launches = useSelector((state) => state.launches);
+
   const handleFutureLaunches = () => {
-    setFutureLaunches(!futureLaunches);
+    dispatch({ type: 'toggleFutureLaunches', payload: !futureLaunches });
   };
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const launchesType = futureLaunches ? 'upcoming' : 'previous';
       try {
         const result = await axios(`https://lldev.thespacedevs.com/2.2.0/launch/${launchesType}/`);
-        setLaunches(result.data.results);
+        dispatch({ type: 'setLaunches', payload: result.data.results });
       } catch (error) {
+        console.log(error);
         setIsError(true);
       } finally {
         setLoading(false);
       }
     };
     fetchData();
-  }, [futureLaunches]);
+  }, [dispatch, futureLaunches]);
 
   return isError ? (
     <div className="text-white text-center">Something went wrong...</div>
