@@ -25,7 +25,6 @@ const Launches = () => {
     dispatch(fetchLaunches(futureLaunches));
   }, [futureLaunches]);
 
-  console.log(`loading: ${loading}`);
   return isError ? (
     <div className="text-white text-center">Something went wrong...</div>
   ) : (
