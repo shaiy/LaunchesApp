@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import LaunchCard from './LaunchCard';
 import axios from 'axios';
@@ -6,14 +6,14 @@ import { Flex, Switch, Text, Spinner, useColorMode, Button, Icon } from '@chakra
 import { MdDarkMode, MdOutlineLightMode } from 'react-icons/md';
 
 const Launches = () => {
-  const [loading, setLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
 
   const dispatch = useDispatch();
 
-  const futureLaunches = useSelector((state) => state.showFutureLaunches);
-  const launches = useSelector((state) => state.launches);
+  const futureLaunches = useSelector((state) => state.launches.showFutureLaunches);
+  const launches = useSelector((state) => state.launches.launches);
+  const loading = useSelector((state) => state.status.isLoading);
+  const isError = useSelector((state) => state.status.isError);
 
   const handleFutureLaunches = () => {
     dispatch({ type: 'toggleFutureLaunches', payload: !futureLaunches });
@@ -21,16 +21,16 @@ const Launches = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
+      dispatch({ type: 'status/setLoading', payload: true });
       const launchesType = futureLaunches ? 'upcoming' : 'previous';
       try {
         const result = await axios(`https://lldev.thespacedevs.com/2.2.0/launch/${launchesType}/`);
-        dispatch({ type: 'setLaunches', payload: result.data.results });
+        dispatch({ type: 'launches/setLaunches', payload: result.data.results });
       } catch (error) {
         console.log(error);
-        setIsError(true);
+        dispatch({ type: 'status/setError', payload: true });
       } finally {
-        setLoading(false);
+        dispatch({ type: 'status/setLoading', payload: false });
       }
     };
     fetchData();

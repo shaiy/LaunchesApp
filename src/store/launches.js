@@ -5,10 +5,10 @@ const initialState = {
 
 export function launchesReducer(state = initialState, action) {
   switch (action.type) {
-    case 'toggleFutureLaunches': {
+    case 'launches/toggleFutureLaunches': {
       return { ...state, showFutureLaunches: action.payload };
     }
-    case 'setLaunches': {
+    case 'launches/setLaunches': {
       return { ...state, launches: action.payload };
     }
     default:
