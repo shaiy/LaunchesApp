@@ -1,19 +1,22 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import LaunchCard from './LaunchCard';
 import axios from 'axios';
 import { Flex, Switch, Text, Spinner, useColorMode, Button, Icon } from '@chakra-ui/react';
 import { MdDarkMode, MdOutlineLightMode } from 'react-icons/md';
+
+import LaunchCard from './LaunchCard';
+import { getIsLoading, getIsError } from '../store/statusIndication';
+import { getLaunches, getShowFutureLaunches } from '../store/launches';
 
 const Launches = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   const dispatch = useDispatch();
 
-  const futureLaunches = useSelector((state) => state.launches.showFutureLaunches);
-  const launches = useSelector((state) => state.launches.launches);
-  const loading = useSelector((state) => state.status.isLoading);
-  const isError = useSelector((state) => state.status.isError);
+  const futureLaunches = useSelector(getShowFutureLaunches);
+  const launches = useSelector(getLaunches);
+  const loading = useSelector(getIsLoading);
+  const isError = useSelector(getIsError);
 
   const handleFutureLaunches = () => {
     dispatch({ type: 'toggleFutureLaunches', payload: !futureLaunches });

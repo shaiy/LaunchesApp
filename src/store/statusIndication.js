@@ -15,3 +15,7 @@ export function statusReducer(state = initialState, action) {
       return state;
   }
 }
+
+//selectors
+export const getIsLoading = (state) => state.status.isLoading;
+export const getIsError = (state) => state.status.isError;

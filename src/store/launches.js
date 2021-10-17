@@ -15,3 +15,7 @@ export function launchesReducer(state = initialState, action) {
       return state;
   }
 }
+
+//selectors
+export const getShowFutureLaunches = (state) => state.launches.showFutureLaunches;
+export const getLaunches = (state) => state.launches.launches;
